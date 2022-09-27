@@ -7,4 +7,10 @@ open class DataModel: ViewModel() {
     val message: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
+    val deleteMessage: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val proMessage: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 }

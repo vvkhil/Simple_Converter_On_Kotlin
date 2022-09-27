@@ -4,66 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LengthFragment">
+    tools:context=".WeightFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="match_parent"
+            android:id="@+id/fromSpin"
+            android:layout_width="225dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="30dp"
             android:entries="@array/weights"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
-            android:id="@+id/tvFromWeight"
+            android:id="@+id/tvFrom"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:hint="ConvertFrom"
-            app:layout_constraintEnd_toEndOf="@+id/spinner2"
-            app:layout_constraintStart_toStartOf="@+id/spinner2"
-            app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+            app:layout_constraintEnd_toEndOf="@+id/fromSpin"
+            app:layout_constraintStart_toStartOf="@+id/fromSpin"
+            app:layout_constraintTop_toBottomOf="@+id/fromSpin" />
 
         <Spinner
-            android:id="@+id/spinner3"
+            android:id="@+id/toSpin"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:entries="@array/weights"
-            app:layout_constraintEnd_toEndOf="@+id/spinner2"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/spinner2"
-            app:layout_constraintTop_toBottomOf="@+id/tvFromWeight" />
+            app:layout_constraintEnd_toEndOf="@+id/tvFrom"
+            app:layout_constraintStart_toStartOf="@+id/tvFrom"
+            app:layout_constraintTop_toBottomOf="@+id/tvFrom" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvTo"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:hint="ConvertTo"
-            app:layout_constraintEnd_toEndOf="@+id/spinner3"
-            app:layout_constraintStart_toStartOf="@+id/spinner3"
-            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+            app:layout_constraintEnd_toEndOf="@+id/toSpin"
+            app:layout_constraintStart_toStartOf="@+id/toSpin"
+            app:layout_constraintTop_toBottomOf="@+id/toSpin" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:text="@string/weight"
             android:textColor="@color/almostBlack"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/convButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="Convert"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fromSpin"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <Button
+            android:id="@+id/swapButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Swap"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/convButton"
+            app:layout_constraintStart_toStartOf="@+id/convButton"
+            app:layout_constraintTop_toBottomOf="@+id/convButton" />
+
+        <Button
+            android:id="@+id/pasteButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Paste"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/copyButton"
+            app:layout_constraintStart_toStartOf="@+id/copyButton"
+            app:layout_constraintTop_toBottomOf="@+id/copyButton" />
+
+        <Button
+            android:id="@+id/copyButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Copy"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/swapButton"
+            app:layout_constraintStart_toStartOf="@+id/swapButton"
+            app:layout_constraintTop_toBottomOf="@+id/swapButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

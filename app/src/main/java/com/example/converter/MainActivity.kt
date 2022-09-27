@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
+
+        binding.proButton?.setOnClickListener {
+            dataModel.proMessage.value = "unlock"
+        }
+
     }
 
 
@@ -85,9 +90,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     fun allClearAction(view: View) {
         dataModel.message.value = ""
+        dataModel.deleteMessage.value = ""
+        canAddDecimal = true
     }
+
     fun backSpaceAction(view: View) {}
     fun equalsAction(view: View) {}
 }
