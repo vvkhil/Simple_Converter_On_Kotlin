@@ -13,4 +13,7 @@ open class DataModel: ViewModel() {
     val proMessage: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
+    val copyMessage: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 }

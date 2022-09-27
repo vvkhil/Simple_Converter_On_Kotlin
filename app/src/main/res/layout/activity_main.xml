@@ -42,7 +42,7 @@
             <Button
                 android:id="@+id/ac"
                 style="@style/buttonNumber"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
                 android:onClick="allClearAction"
                 android:text="AC"
@@ -53,7 +53,7 @@
             <Button
                 android:id="@+id/button9"
                 style="@style/buttonNumber"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:onClick="backSpaceAction"
                 android:text="🆑"
@@ -63,15 +63,16 @@
             <Button
                 android:id="@+id/proButton"
                 style="@style/buttonNumber"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
                 android:text="Pro"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="209dp" />
+                app:layout_constraintEnd_toStartOf="@+id/ac" />
 
             <Button
                 android:id="@+id/button7"
                 style="@style/buttonOperator"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="/"
                 app:layout_constraintBottom_toTopOf="@+id/button9"
@@ -99,11 +100,11 @@
             <Button
                 android:id="@+id/nine"
                 style="@style/buttonNumber"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="108dp"
+                android:layout_marginBottom="8dp"
                 android:text="9"
                 app:layout_constraintBottom_toTopOf="@+id/six"
-                app:layout_constraintEnd_toStartOf="@+id/button7" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
                 android:id="@+id/four"
@@ -130,7 +131,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="6"
                 app:layout_constraintBottom_toTopOf="@+id/three"
-                app:layout_constraintEnd_toStartOf="@+id/button9" />
+                app:layout_constraintEnd_toStartOf="@+id/button7" />
 
             <Button
                 android:id="@+id/one"
@@ -154,9 +155,10 @@
                 android:id="@+id/three"
                 style="@style/buttonNumber"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="3"
-                app:layout_constraintEnd_toStartOf="@+id/ac"
-                tools:layout_editor_absoluteY="230dp" />
+                app:layout_constraintBottom_toTopOf="@+id/proButton"
+                app:layout_constraintEnd_toStartOf="@+id/button9" />
 
             <Button
                 android:id="@+id/button4"

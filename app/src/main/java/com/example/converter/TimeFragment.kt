@@ -41,6 +41,29 @@ class TimeFragment : Fragment() {
             }
         }
 
+        binding.copyButton.setOnClickListener {
+            dataModel.copyMessage.value = binding.tvFrom.text.toString()
+        }
+
+        binding.pasteButton.setOnClickListener {
+            dataModel.copyMessage.observe(activity as LifecycleOwner) {
+                binding.tvFrom.text = it
+            }
+        }
+
+        binding.swapButton.setOnClickListener {
+            binding.apply {
+                val fromId = fromSpin.selectedItemPosition
+                val toId = toSpin.selectedItemPosition
+                fromSpin.setSelection(toId)
+                toSpin.setSelection(fromId)
+
+                val buffer = tvFrom.text
+                tvFrom.text = tvTo.text
+                tvTo.text = buffer
+            }
+        }
+
         binding.apply {
             convButton.setOnClickListener {
                 when(fromSpin.selectedItem.toString()) {
