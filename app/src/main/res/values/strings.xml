@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Converter</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="length" translatable="false">Length</string>
+    <string name="weight" translatable="false">Weight</string>
+    <string name="time" translatable="false">Time</string>
+    <string name="categories_for_comparison" translatable="false">Categories for comparison</string>
+
+    <string-array name="distances">
+        <item>cm</item>
+        <item>m</item>
+        <item>km</item>
+    </string-array>
+    <string-array name="weights">
+        <item>g</item>
+        <item>kg</item>
+        <item>ton</item>
+    </string-array>
+    <string-array name="times">
+        <item>sec</item>
+        <item>min</item>
+        <item>h</item>
+    </string-array>
+</resources>

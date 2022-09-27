@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/categories_for_comparison">
+        <menu>
+            <item android:title="@string/length" android:id="@+id/length" android:icon="@drawable/ic_rule"/>
+            <item android:title="@string/weight" android:id="@+id/weight" android:icon="@drawable/ic_fastfood"/>
+            <item android:title="@string/time" android:id="@+id/time" android:icon="@drawable/ic_timer"/>
+        </menu>
+    </item>
+
+</menu>

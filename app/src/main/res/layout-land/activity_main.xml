@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="20dp">
+
+            <FrameLayout
+                android:id="@+id/placeHolder"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/buttonRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/ac"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="allClearAction"
+                android:text="AC"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/seven"
+                app:layout_constraintEnd_toStartOf="@+id/button9" />
+
+
+            <Button
+                android:id="@+id/button9"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="backSpaceAction"
+                android:text="🆑"
+                app:layout_constraintBottom_toTopOf="@+id/eight"
+                app:layout_constraintEnd_toStartOf="@+id/button8" />
+
+            <Button
+                android:id="@+id/button8"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                app:layout_constraintBottom_toTopOf="@+id/nine"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/button7"
+                style="@style/buttonOperator"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="/"
+                app:layout_constraintBottom_toTopOf="@+id/ac"
+                app:layout_constraintEnd_toStartOf="@+id/button6" />
+
+            <Button
+                android:id="@+id/seven"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="7"
+                app:layout_constraintBottom_toTopOf="@+id/four"
+                app:layout_constraintEnd_toStartOf="@+id/eight" />
+
+            <Button
+                android:id="@+id/eight"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="8"
+                app:layout_constraintBottom_toTopOf="@+id/five"
+                app:layout_constraintEnd_toStartOf="@+id/nine" />
+
+
+            <Button
+                android:id="@+id/nine"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="9"
+                app:layout_constraintBottom_toTopOf="@+id/six"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/button6"
+                style="@style/buttonOperator"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="x"
+                app:layout_constraintBottom_toTopOf="@+id/button9"
+                app:layout_constraintEnd_toStartOf="@+id/button5" />
+
+            <Button
+                android:id="@+id/four"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="4"
+                app:layout_constraintBottom_toTopOf="@+id/one"
+                app:layout_constraintEnd_toStartOf="@+id/five" />
+
+            <Button
+                android:id="@+id/five"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="5"
+                app:layout_constraintBottom_toTopOf="@+id/two"
+                app:layout_constraintEnd_toStartOf="@+id/six" />
+
+            <Button
+                android:id="@+id/six"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="6"
+                app:layout_constraintBottom_toTopOf="@+id/three"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/button5"
+                style="@style/buttonOperator"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="-"
+                app:layout_constraintBottom_toTopOf="@+id/button8"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/one"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="1"
+                app:layout_constraintBottom_toTopOf="@+id/button4"
+                app:layout_constraintEnd_toStartOf="@+id/two" />
+
+            <Button
+                android:id="@+id/two"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="2"
+                app:layout_constraintBottom_toTopOf="@+id/button2"
+                app:layout_constraintEnd_toStartOf="@+id/three" />
+
+            <Button
+                android:id="@+id/three"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="3"
+                app:layout_constraintBottom_toTopOf="@+id/button"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/button4"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="."
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button2" />
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button" />
+
+            <Button
+                android:id="@+id/button"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:onClick="equalsAction"
+                android:text="="
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
