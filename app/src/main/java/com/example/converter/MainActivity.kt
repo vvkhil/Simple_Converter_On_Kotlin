@@ -39,9 +39,7 @@ class MainActivity : AppCompatActivity() {
                         openFrag(TimeFragment.newInstance())
                         dataModel.message.value = ""
                     }
-//                    else -> {
-//
-//                    }
+
                 }
                 drawer.closeDrawer(GravityCompat.START)
                 true
@@ -53,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 
     private fun openFrag(f: Fragment) {
         supportFragmentManager
@@ -97,6 +94,4 @@ class MainActivity : AppCompatActivity() {
         canAddDecimal = true
     }
 
-    fun backSpaceAction(view: View) {}
-    fun equalsAction(view: View) {}
 }

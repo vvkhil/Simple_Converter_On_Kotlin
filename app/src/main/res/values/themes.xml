@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Converter" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/almostGreen</item>
+        <item name="colorPrimary">@color/almostPink</item>
         <item name="colorPrimaryVariant">@color/orange</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->

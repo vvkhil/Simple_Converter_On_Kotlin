@@ -42,22 +42,12 @@
             <Button
                 android:id="@+id/ac"
                 style="@style/buttonNumber"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="20dp"
                 android:onClick="allClearAction"
                 android:text="AC"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <Button
-                android:id="@+id/button9"
-                style="@style/buttonNumber"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:onClick="backSpaceAction"
-                android:text="🆑"
-                app:layout_constraintBottom_toTopOf="@+id/ac"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
@@ -72,10 +62,10 @@
             <Button
                 android:id="@+id/button7"
                 style="@style/buttonOperator"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="74dp"
                 android:text="/"
-                app:layout_constraintBottom_toTopOf="@+id/button9"
+                app:layout_constraintBottom_toTopOf="@+id/ac"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
@@ -96,11 +86,10 @@
                 app:layout_constraintBottom_toTopOf="@+id/five"
                 app:layout_constraintEnd_toStartOf="@+id/nine" />
 
-
             <Button
                 android:id="@+id/nine"
                 style="@style/buttonNumber"
-                android:layout_marginEnd="108dp"
+                android:layout_marginEnd="103dp"
                 android:layout_marginBottom="8dp"
                 android:text="9"
                 app:layout_constraintBottom_toTopOf="@+id/six"
@@ -154,11 +143,11 @@
             <Button
                 android:id="@+id/three"
                 style="@style/buttonNumber"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="103dp"
                 android:layout_marginBottom="10dp"
                 android:text="3"
                 app:layout_constraintBottom_toTopOf="@+id/proButton"
-                app:layout_constraintEnd_toStartOf="@+id/button9" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
                 android:id="@+id/button4"

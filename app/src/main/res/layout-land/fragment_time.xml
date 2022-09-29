@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LengthFragment">
+    tools:context=".TimeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,18 +12,17 @@
 
         <Spinner
             android:id="@+id/fromSpin"
-            android:layout_width="225dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
-            android:entries="@array/distances"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:entries="@array/times"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/tvFrom"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:hint="ConvertFrom"
             app:layout_constraintEnd_toEndOf="@+id/fromSpin"
@@ -32,18 +31,17 @@
 
         <Spinner
             android:id="@+id/toSpin"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:entries="@array/distances"
-            app:layout_constraintEnd_toEndOf="@+id/tvFrom"
-            app:layout_constraintStart_toStartOf="@+id/tvFrom"
-            app:layout_constraintTop_toBottomOf="@+id/tvFrom" />
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="350dp"
+            android:entries="@array/times"
+            app:layout_constraintStart_toEndOf="@+id/fromSpin"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/tvTo"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:hint="ConvertTo"
             app:layout_constraintEnd_toEndOf="@+id/toSpin"
@@ -54,32 +52,21 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/length"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/time"
             android:textColor="@color/almostBlack"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/convButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:text="Convert"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fromSpin"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
             android:id="@+id/swapButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="Swap"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/convButton"
@@ -88,8 +75,9 @@
 
         <Button
             android:id="@+id/pasteButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="Paste"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/copyButton"
@@ -98,13 +86,25 @@
 
         <Button
             android:id="@+id/copyButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
             android:text="Copy"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/swapButton"
-            app:layout_constraintStart_toStartOf="@+id/swapButton"
-            app:layout_constraintTop_toBottomOf="@+id/swapButton" />
+            app:layout_constraintEnd_toStartOf="@+id/toSpin"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/convButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Convert"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toEndOf="@+id/fromSpin"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
