@@ -23,8 +23,10 @@ class WeightFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.edFrom?.showSoftInputOnFocus = false
+
         dataModel.message.observe(activity as LifecycleOwner) {
-            binding.tvFrom.text = it
+            binding.edFrom?.setText(it)
         }
 
         dataModel.deleteMessage.observe(activity as LifecycleOwner) {
@@ -42,12 +44,12 @@ class WeightFragment : Fragment() {
         }
 
         binding.copyButton.setOnClickListener {
-            dataModel.copyMessage.value = binding.tvFrom.text.toString()
+            dataModel.copyMessage.value = binding.edFrom?.text.toString()
         }
 
         binding.pasteButton.setOnClickListener {
             dataModel.copyMessage.observe(activity as LifecycleOwner) {
-                binding.tvFrom.text = it
+                binding.edFrom?.setText(it)
             }
         }
 
@@ -58,8 +60,8 @@ class WeightFragment : Fragment() {
                 fromSpin.setSelection(toId)
                 toSpin.setSelection(fromId)
 
-                val buffer = tvFrom.text
-                tvFrom.text = tvTo.text
+                val buffer = edFrom?.text
+                edFrom?.setText(tvTo.text)
                 tvTo.text = buffer
             }
         }
@@ -69,29 +71,29 @@ class WeightFragment : Fragment() {
                 when(fromSpin.selectedItem.toString()) {
                     "g" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "g" -> tvTo.text = tvFrom.text
+                            "g" -> tvTo.text = edFrom?.text
                             "kg" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 1000).toString()
+                                (edFrom?.text.toString().toFloat() / 1000).toString()
                             "ton" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 1000000).toString()
+                                (edFrom?.text.toString().toFloat() / 1000000).toString()
                         }
                     }
                     "kg" -> {
                         when(toSpin.selectedItem.toString()) {
                             "g" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 1000).toString()
-                            "kg" -> tvTo.text = tvFrom.text
+                                (edFrom?.text.toString().toFloat() * 1000).toString()
+                            "kg" -> tvTo.text = edFrom?.text
                             "ton" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 1000).toString()
+                                (edFrom?.text.toString().toFloat() / 1000).toString()
                         }
                     }
                     "ton" -> {
                         when(toSpin.selectedItem.toString()) {
                             "g" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 1000000).toString()
+                                (edFrom?.text.toString().toFloat() * 1000000).toString()
                             "kg" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 1000).toString()
-                            "ton" -> tvTo.text = tvFrom.text
+                                (edFrom?.text.toString().toFloat() * 1000).toString()
+                            "ton" -> tvTo.text = edFrom?.text
                         }
                     }
                 }

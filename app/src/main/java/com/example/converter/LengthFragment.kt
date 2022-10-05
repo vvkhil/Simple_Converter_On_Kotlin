@@ -23,8 +23,10 @@ class LengthFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.edFrom?.showSoftInputOnFocus = false
+
         dataModel.message.observe(activity as LifecycleOwner) {
-            binding.tvFrom.text = it
+            binding.edFrom?.setText(it)
         }
 
         dataModel.deleteMessage.observe(activity as LifecycleOwner) {
@@ -42,12 +44,12 @@ class LengthFragment : Fragment() {
         }
 
         binding.copyButton.setOnClickListener {
-            dataModel.copyMessage.value = binding.tvFrom.text.toString()
+            dataModel.copyMessage.value = binding.edFrom?.text.toString()
         }
 
         binding.pasteButton.setOnClickListener {
             dataModel.copyMessage.observe(activity as LifecycleOwner) {
-                binding.tvFrom.text = it
+                binding.edFrom?.setText(it)
             }
         }
 
@@ -58,8 +60,8 @@ class LengthFragment : Fragment() {
                 fromSpin.setSelection(toId)
                 toSpin.setSelection(fromId)
 
-                val buffer = tvFrom.text
-                tvFrom.text = tvTo.text
+                val buffer = edFrom?.text
+                edFrom?.setText(tvTo.text)
                 tvTo.text = buffer
             }
         }
@@ -69,29 +71,29 @@ class LengthFragment : Fragment() {
                 when(fromSpin.selectedItem.toString()) {
                     "cm" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "cm" -> tvTo.text = tvFrom.text
+                            "cm" -> tvTo.text = edFrom?.text
                             "m" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 100).toString()
+                                (edFrom?.text.toString().toFloat() / 100).toString()
                             "km" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 100000).toString()
+                                (edFrom?.text.toString().toFloat() / 100000).toString()
                         }
                     }
                     "m" -> {
                         when(toSpin.selectedItem.toString()) {
                             "cm" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 100).toString()
-                            "m" -> tvTo.text = tvFrom.text
+                                (edFrom?.text.toString().toFloat() * 100).toString()
+                            "m" -> tvTo.text = edFrom?.text
                             "km" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 1000).toString()
+                                (edFrom?.text.toString().toFloat() / 1000).toString()
                         }
                     }
                     "km" -> {
                         when(toSpin.selectedItem.toString()) {
                             "cm" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 100000).toString()
+                                (edFrom?.text.toString().toFloat() * 100000).toString()
                             "m" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 1000).toString()
-                            "km" -> tvTo.text = tvFrom.text
+                                (edFrom?.text.toString().toFloat() * 1000).toString()
+                            "km" -> tvTo.text = edFrom?.text
                         }
                     }
                 }

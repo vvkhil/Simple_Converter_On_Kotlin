@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Converter</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="length" translatable="false">Length</string>
+    <string name="length" translatable="false">Distance</string>
     <string name="weight" translatable="false">Weight</string>
     <string name="time" translatable="false">Time</string>
     <string name="categories_for_comparison" translatable="false">Categories for comparison</string>

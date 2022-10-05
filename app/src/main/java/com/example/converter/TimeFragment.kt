@@ -23,8 +23,10 @@ class TimeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.edFrom?.showSoftInputOnFocus = false
+
         dataModel.message.observe(activity as LifecycleOwner) {
-            binding.tvFrom.text = it
+            binding.edFrom?.setText(it)
         }
 
         dataModel.deleteMessage.observe(activity as LifecycleOwner) {
@@ -42,12 +44,12 @@ class TimeFragment : Fragment() {
         }
 
         binding.copyButton.setOnClickListener {
-            dataModel.copyMessage.value = binding.tvFrom.text.toString()
+            dataModel.copyMessage.value = binding.edFrom?.text.toString()
         }
 
         binding.pasteButton.setOnClickListener {
             dataModel.copyMessage.observe(activity as LifecycleOwner) {
-                binding.tvFrom.text = it
+                binding.edFrom?.setText(it)
             }
         }
 
@@ -58,8 +60,8 @@ class TimeFragment : Fragment() {
                 fromSpin.setSelection(toId)
                 toSpin.setSelection(fromId)
 
-                val buffer = tvFrom.text
-                tvFrom.text = tvTo.text
+                val buffer = edFrom?.text
+                edFrom?.setText(tvTo.text)
                 tvTo.text = buffer
             }
         }
@@ -69,29 +71,29 @@ class TimeFragment : Fragment() {
                 when(fromSpin.selectedItem.toString()) {
                     "sec" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "sec" -> tvTo.text = tvFrom.text
+                            "sec" -> tvTo.text = edFrom?.text
                             "min" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 60).toString()
+                                (edFrom?.text.toString().toFloat() / 60).toString()
                             "h" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 3600).toString()
+                                (edFrom?.text.toString().toFloat() / 3600).toString()
                         }
                     }
                     "min" -> {
                         when(toSpin.selectedItem.toString()) {
                             "sec" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 60).toString()
-                            "min" -> tvTo.text = tvFrom.text
+                                (edFrom?.text.toString().toFloat() * 60).toString()
+                            "min" -> tvTo.text = edFrom?.text
                             "h" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() / 60).toString()
+                                (edFrom?.text.toString().toFloat() / 60).toString()
                         }
                     }
                     "h" -> {
                         when(toSpin.selectedItem.toString()) {
                             "sec" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 3600).toString()
+                                (edFrom?.text.toString().toFloat() * 3600).toString()
                             "min" -> tvTo.text =
-                                (tvFrom.text.toString().toFloat() * 60).toString()
-                            "h" -> tvTo.text = tvFrom.text
+                                (edFrom?.text.toString().toFloat() * 60).toString()
+                            "h" -> tvTo.text = edFrom?.text
                         }
                     }
                 }
