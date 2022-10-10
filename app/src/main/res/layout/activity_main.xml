@@ -134,10 +134,20 @@
             <Button
                 android:id="@+id/three"
                 style="@style/buttonNumber"
-                android:layout_marginEnd="103dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="3"
                 app:layout_constraintBottom_toTopOf="@+id/proButton"
+                app:layout_constraintEnd_toStartOf="@+id/button" />
+
+            <Button
+                android:id="@+id/button"
+                style="@style/buttonNumber"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="backSpaceAction"
+                android:text="🆑"
+                app:layout_constraintBottom_toTopOf="@+id/ac"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button

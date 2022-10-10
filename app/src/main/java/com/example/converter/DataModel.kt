@@ -16,4 +16,7 @@ open class DataModel: ViewModel() {
     val copyMessage: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
+    val backMessage: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 }

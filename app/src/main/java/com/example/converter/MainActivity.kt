@@ -65,33 +65,35 @@ class MainActivity : AppCompatActivity() {
                 dataModel.message.value = ""
                 if(view.text == ".") {
                     if(canAddDecimal) {
-                        dataModel.message.value += view.text
+                        dataModel.message.value = view.text.toString()
                     }
                     canAddDecimal = false
                 }
                 else {
-                    dataModel.message.value += view.text
+                    dataModel.message.value = view.text.toString()
                 }
                 canAddValue = false
             }
             else {
                 if(view.text == ".") {
                     if(canAddDecimal) {
-                        dataModel.message.value += view.text
+                        dataModel.message.value = view.text.toString()
                     }
                     canAddDecimal = false
                 }
                 else {
-                    dataModel.message.value += view.text
+                    dataModel.message.value = view.text.toString()
                 }
             }
         }
     }
 
     fun allClearAction(view: View) {
-        dataModel.message.value = ""
-        dataModel.deleteMessage.value = ""
+        dataModel.deleteMessage.value = "all_clear"
         canAddDecimal = true
     }
 
+    fun backSpaceAction(view: View) {
+        dataModel.backMessage.value = "back"
+    }
 }
