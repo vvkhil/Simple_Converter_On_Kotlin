@@ -1,5 +1,6 @@
 package com.example.converter
 
+import android.app.Activity
 import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import com.example.converter.databinding.FragmentLengthBinding
@@ -26,9 +28,17 @@ class LengthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.edFrom.showSoftInputOnFocus = false
+        val activity = activity
+        dataModel.addDecimalMessage.value = true
 
         dataModel.message.observe(activity as LifecycleOwner) {
-            binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+            if(binding.edFrom.length() <= 12) {
+                binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+            }
+            else {
+                Toast.makeText(activity, "You can only enter 12 characters",
+                    Toast.LENGTH_SHORT).show()
+            }
         }
 
         dataModel.deleteMessage.observe(activity as LifecycleOwner) {
@@ -50,7 +60,6 @@ class LengthFragment : Fragment() {
                             edFrom.text.subSequence(0, edFrom.getSelectionStart() - 1) as Editable?
                         var endText =
                             edFrom.text.subSequence(edFrom.getSelectionStart(), length) as Editable?
-                        edFrom.setText("")
                         edFrom.setText(startText)
                         edFrom.append(endText)
                         edFrom.setSelection(position)
@@ -75,7 +84,13 @@ class LengthFragment : Fragment() {
 
         binding.pasteButton.setOnClickListener {
             dataModel.copyMessage.observe(activity as LifecycleOwner) {
-                binding.edFrom.setText(it)
+                if(it.toFloatOrNull() != null) {
+                    binding.edFrom.setText(it)
+                }
+                else {
+                    Toast.makeText(activity, "Incorrect input",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
