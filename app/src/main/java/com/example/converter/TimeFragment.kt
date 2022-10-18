@@ -29,16 +29,27 @@ class TimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.edFrom.showSoftInputOnFocus = false
+        binding.edFrom.setText("")
         val activity = activity
-        dataModel.addDecimalMessage.value = true
 
         dataModel.message.observe(activity as LifecycleOwner) {
-            if(binding.edFrom.length() <= 12) {
-                binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+            if(binding.edFrom.text.length == 16 && binding.edFrom.text[15].equals('.')) {
+                if(binding.edFrom.length() < 17) {
+                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                }
+                else {
+                    Toast.makeText(activity, "You can only enter 17 characters",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
             else {
-                Toast.makeText(activity, "You can only enter 12 characters",
-                    Toast.LENGTH_SHORT).show()
+                if(binding.edFrom.length() < 16) {
+                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                }
+                else {
+                    Toast.makeText(activity, "You can only enter 16 characters",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -91,7 +102,7 @@ class TimeFragment : Fragment() {
                     binding.edFrom.setText(it)
                 }
                 else {
-                    Toast.makeText(activity, "Incorrect input",
+                    Toast.makeText(activity, "Incorrect paste",
                         Toast.LENGTH_SHORT).show()
                 }
             }
@@ -99,16 +110,23 @@ class TimeFragment : Fragment() {
 
         binding.swapButton.setOnClickListener {
             binding.apply {
-                val fromId = fromSpin.selectedItemPosition
-                val toId = toSpin.selectedItemPosition
-                fromSpin.setSelection(toId)
-                toSpin.setSelection(fromId)
+                if(tvTo.length() > 16) {
+                    Toast.makeText(activity, "You cannot do this because length > 16",
+                        Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    val fromId = fromSpin.selectedItemPosition
+                    val toId = toSpin.selectedItemPosition
+                    fromSpin.setSelection(toId)
+                    toSpin.setSelection(fromId)
 
-                val buffer = edFrom.text
-                edFrom.setText(tvTo.text)
-                tvTo.text = buffer
+                    val buffer = edFrom.text
+                    edFrom.setText(tvTo.text)
+                    tvTo.text = buffer
+                }
             }
         }
+
 
         binding.apply {
             convButton.setOnClickListener {
@@ -123,7 +141,7 @@ class TimeFragment : Fragment() {
                     "min" -> {
                         when(toSpin.selectedItem.toString()) {
                             "sec" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 60).toString()
+                                (edFrom.text.toString().toBigDecimal() * 60.toBigDecimal()).toString()
                             "min" -> tvTo.text = edFrom.text
                             "h" -> tvTo.text = convertBigDecimal(60, edFrom)
                         }
@@ -131,9 +149,9 @@ class TimeFragment : Fragment() {
                     "h" -> {
                         when(toSpin.selectedItem.toString()) {
                             "sec" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 3600).toString()
+                                (edFrom.text.toString().toBigDecimal() * 3600.toBigDecimal()).toString()
                             "min" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 60).toString()
+                                (edFrom.text.toString().toBigDecimal() * 60.toBigDecimal()).toString()
                             "h" -> tvTo.text = edFrom.text
                         }
                     }

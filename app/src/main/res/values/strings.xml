@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">Converter</string>
     <string name="length" translatable="false">Distance</string>
-    <string name="weight" translatable="false">Weight</string>
+    <string name="weight" translatable="false">Currency</string>
     <string name="time" translatable="false">Time</string>
     <string name="categories_for_comparison" translatable="false">Categories for comparison</string>
 
     <string-array name="distances">
         <item>cm</item>
+        <item>dm</item>
         <item>m</item>
-        <item>km</item>
     </string-array>
     <string-array name="weights">
-        <item>g</item>
-        <item>kg</item>
-        <item>ton</item>
+        <item>USD</item>
+        <item>BYN</item>
+        <item>RUB</item>
     </string-array>
     <string-array name="times">
         <item>sec</item>

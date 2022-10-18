@@ -6,7 +6,7 @@
     <item android:title="@string/categories_for_comparison">
         <menu>
             <item android:title="@string/length" android:id="@+id/length" android:icon="@drawable/ic_rule"/>
-            <item android:title="@string/weight" android:id="@+id/weight" android:icon="@drawable/ic_fastfood"/>
+            <item android:title="@string/weight" android:id="@+id/weight" android:icon="@drawable/ic_money"/>
             <item android:title="@string/time" android:id="@+id/time" android:icon="@drawable/ic_timer"/>
         </menu>
     </item>

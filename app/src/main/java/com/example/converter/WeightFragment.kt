@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import com.example.converter.databinding.FragmentWeightBinding
@@ -26,16 +27,27 @@ class WeightFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.edFrom.showSoftInputOnFocus = false
+        binding.edFrom.setText("")
         val activity = activity
-        dataModel.addDecimalMessage.value = true
 
         dataModel.message.observe(activity as LifecycleOwner) {
-            if(binding.edFrom.length() <= 12) {
-                binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+            if(binding.edFrom.text.length == 16 && binding.edFrom.text[15].equals('.')) {
+                if(binding.edFrom.length() < 17) {
+                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                }
+                else {
+                    Toast.makeText(activity, "You can only enter 17 characters",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
             else {
-                Toast.makeText(activity, "You can only enter 12 characters",
-                    Toast.LENGTH_SHORT).show()
+                if(binding.edFrom.length() < 16) {
+                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                }
+                else {
+                    Toast.makeText(activity, "You can only enter 16 characters",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -90,7 +102,7 @@ class WeightFragment : Fragment() {
                     binding.edFrom.setText(it)
                 }
                 else {
-                    Toast.makeText(activity, "Incorrect input",
+                    Toast.makeText(activity, "Incorrect paste",
                         Toast.LENGTH_SHORT).show()
                 }
             }
@@ -98,45 +110,52 @@ class WeightFragment : Fragment() {
 
         binding.swapButton.setOnClickListener {
             binding.apply {
-                val fromId = fromSpin.selectedItemPosition
-                val toId = toSpin.selectedItemPosition
-                fromSpin.setSelection(toId)
-                toSpin.setSelection(fromId)
+                if(tvTo.length() > 16) {
+                    Toast.makeText(activity, "You cannot do this because length > 16",
+                        Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    val fromId = fromSpin.selectedItemPosition
+                    val toId = toSpin.selectedItemPosition
+                    fromSpin.setSelection(toId)
+                    toSpin.setSelection(fromId)
 
-                val buffer = edFrom.text
-                edFrom.setText(tvTo.text)
-                tvTo.text = buffer
+                    val buffer = edFrom.text
+                    edFrom.setText(tvTo.text)
+                    tvTo.text = buffer
+                }
             }
         }
+
 
         binding.apply {
             convButton.setOnClickListener {
                 when(fromSpin.selectedItem.toString()) {
-                    "g" -> {
+                    "USD" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "g" -> tvTo.text = edFrom.text
-                            "kg" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() / 1000).toString()
-                            "ton" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() / 1000000).toString()
+                            "USD" -> tvTo.text = edFrom.text
+                            "BYN" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() * 2.53.toBigDecimal()).toString()
+                            "RUB" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() * 62.35.toBigDecimal()).toString()
                         }
                     }
-                    "kg" -> {
+                    "BYN" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "g" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 1000).toString()
-                            "kg" -> tvTo.text = edFrom.text
-                            "ton" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() / 1000).toString()
+                            "USD" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() / 2.53.toBigDecimal()).toString()
+                            "BYN" -> tvTo.text = edFrom.text
+                            "RUB" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() * 24.60.toBigDecimal()).toString()
                         }
                     }
-                    "ton" -> {
+                    "RUB" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "g" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 1000000).toString()
-                            "kg" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 1000).toString()
-                            "ton" -> tvTo.text = edFrom.text
+                            "USD" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() * (0.016).toBigDecimal()).toString()
+                            "BYN" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() * (0.041).toBigDecimal()).toString()
+                            "RUB" -> tvTo.text = edFrom.text
                         }
                     }
                 }

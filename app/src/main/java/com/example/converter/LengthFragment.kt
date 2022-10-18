@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
@@ -28,16 +29,27 @@ class LengthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.edFrom.showSoftInputOnFocus = false
+        binding.edFrom.setText("")
         val activity = activity
-        dataModel.addDecimalMessage.value = true
 
         dataModel.message.observe(activity as LifecycleOwner) {
-            if(binding.edFrom.length() <= 12) {
-                binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+            if(binding.edFrom.text.length == 16 && binding.edFrom.text[15].equals('.')) {
+                if(binding.edFrom.length() < 17) {
+                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                }
+                else {
+                    Toast.makeText(activity, "You can only enter 17 characters",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
             else {
-                Toast.makeText(activity, "You can only enter 12 characters",
-                    Toast.LENGTH_SHORT).show()
+                if(binding.edFrom.length() < 16) {
+                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                }
+                else {
+                    Toast.makeText(activity, "You can only enter 16 characters",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -79,7 +91,15 @@ class LengthFragment : Fragment() {
         }
 
         binding.copyButton.setOnClickListener {
-            dataModel.copyMessage.value = binding.edFrom.text.toString()
+            val prevText: EditText = binding.edFrom
+            val str: String = prevText.text.toString()
+            if(str.isNotEmpty()){
+                dataModel.copyMessage.value = prevText.text.toString()
+            }
+            else
+            {
+                Toast.makeText(activity,"Please Enter some text", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.pasteButton.setOnClickListener {
@@ -88,7 +108,7 @@ class LengthFragment : Fragment() {
                     binding.edFrom.setText(it)
                 }
                 else {
-                    Toast.makeText(activity, "Incorrect input",
+                    Toast.makeText(activity, "Incorrect paste",
                         Toast.LENGTH_SHORT).show()
                 }
             }
@@ -96,14 +116,20 @@ class LengthFragment : Fragment() {
 
         binding.swapButton.setOnClickListener {
             binding.apply {
-                val fromId = fromSpin.selectedItemPosition
-                val toId = toSpin.selectedItemPosition
-                fromSpin.setSelection(toId)
-                toSpin.setSelection(fromId)
+                if(tvTo.length() > 16) {
+                    Toast.makeText(activity, "You cannot do this because length > 16",
+                        Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    val fromId = fromSpin.selectedItemPosition
+                    val toId = toSpin.selectedItemPosition
+                    fromSpin.setSelection(toId)
+                    toSpin.setSelection(fromId)
 
-                val buffer = edFrom.text
-                edFrom.setText(tvTo.text)
-                tvTo.text = buffer
+                    val buffer = edFrom.text
+                    edFrom.setText(tvTo.text)
+                    tvTo.text = buffer
+                }
             }
         }
 
@@ -113,28 +139,28 @@ class LengthFragment : Fragment() {
                     "cm" -> {
                         when(toSpin.selectedItem.toString()) {
                             "cm" -> tvTo.text = edFrom.text
+                            "dm" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() / 10.toBigDecimal()).toString()
                             "m" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() / 100).toString()
-                            "km" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() / 100000).toString()
+                                (edFrom.text.toString().toBigDecimal() / 100.toBigDecimal()).toString()
+                        }
+                    }
+                    "dm" -> {
+                        when(toSpin.selectedItem.toString()) {
+                            "cm" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() * 10.toBigDecimal()).toString()
+                            "dm" -> tvTo.text = edFrom.text
+                            "m" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() / 10.toBigDecimal()).toString()
                         }
                     }
                     "m" -> {
                         when(toSpin.selectedItem.toString()) {
                             "cm" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 100).toString()
+                                (edFrom.text.toString().toBigDecimal() * 100.toBigDecimal()).toString()
+                            "dm" -> tvTo.text =
+                                (edFrom.text.toString().toBigDecimal() * 10.toBigDecimal()).toString()
                             "m" -> tvTo.text = edFrom.text
-                            "km" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() / 1000).toString()
-                        }
-                    }
-                    "km" -> {
-                        when(toSpin.selectedItem.toString()) {
-                            "cm" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 100000).toString()
-                            "m" -> tvTo.text =
-                                (edFrom.text.toString().toFloat() * 1000).toString()
-                            "km" -> tvTo.text = edFrom.text
                         }
                     }
                 }

@@ -4,9 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 open class DataModel: ViewModel() {
-    val addDecimalMessage: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
     val message: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
