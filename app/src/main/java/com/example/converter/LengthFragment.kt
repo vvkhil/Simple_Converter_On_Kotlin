@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import com.example.converter.databinding.FragmentLengthBinding
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class LengthFragment : Fragment() {
     lateinit var binding: FragmentLengthBinding
@@ -33,22 +35,27 @@ class LengthFragment : Fragment() {
         val activity = activity
 
         dataModel.message.observe(activity as LifecycleOwner) {
-            if(binding.edFrom.text.length == 16 && binding.edFrom.text[15].equals('.')) {
-                if(binding.edFrom.length() < 17) {
-                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
-                }
-                else {
-                    Toast.makeText(activity, "You can only enter 17 characters",
-                        Toast.LENGTH_SHORT).show()
-                }
+            if(it=="") {
+                binding.edFrom.setText("")
             }
             else {
-                if(binding.edFrom.length() < 16) {
-                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                if(binding.edFrom.text.length == 16 && binding.edFrom.text[15].equals('.')) {
+                    if(binding.edFrom.length() < 17) {
+                        binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                    }
+                    else {
+                        Toast.makeText(activity, "You can only enter 17 characters",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
                 else {
-                    Toast.makeText(activity, "You can only enter 16 characters",
-                        Toast.LENGTH_SHORT).show()
+                    if(binding.edFrom.length() < 16) {
+                        binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                    }
+                    else {
+                        Toast.makeText(activity, "You can only enter 16 characters",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -121,14 +128,20 @@ class LengthFragment : Fragment() {
                         Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    val fromId = fromSpin.selectedItemPosition
-                    val toId = toSpin.selectedItemPosition
-                    fromSpin.setSelection(toId)
-                    toSpin.setSelection(fromId)
+                    if(tvTo.getText().toString().toFloatOrNull() != null) {
+                        val fromId = fromSpin.selectedItemPosition
+                        val toId = toSpin.selectedItemPosition
+                        fromSpin.setSelection(toId)
+                        toSpin.setSelection(fromId)
 
-                    val buffer = edFrom.text
-                    edFrom.setText(tvTo.text)
-                    tvTo.text = buffer
+                        val buffer = edFrom.text
+                        edFrom.setText(tvTo.text)
+                        tvTo.text = buffer
+                    }
+                    else {
+                        Toast.makeText(activity, "You cannot do this because value in ConvertTo is incorrect",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -140,26 +153,26 @@ class LengthFragment : Fragment() {
                         when(toSpin.selectedItem.toString()) {
                             "cm" -> tvTo.text = edFrom.text
                             "dm" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() / 10.toBigDecimal()).toString()
+                               (edFrom.text.toString().toBigDecimal() * 0.1.toBigDecimal()).toPlainString()
                             "m" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() / 100.toBigDecimal()).toString()
+                                (edFrom.text.toString().toBigDecimal() * 0.01.toBigDecimal()).toPlainString()
                         }
                     }
                     "dm" -> {
                         when(toSpin.selectedItem.toString()) {
                             "cm" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() * 10.toBigDecimal()).toString()
+                                (edFrom.text.toString().toBigDecimal() * 10.0.toBigDecimal()).toPlainString()
                             "dm" -> tvTo.text = edFrom.text
                             "m" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() / 10.toBigDecimal()).toString()
+                                (edFrom.text.toString().toBigDecimal() * 0.1.toBigDecimal()).toPlainString()
                         }
                     }
                     "m" -> {
                         when(toSpin.selectedItem.toString()) {
                             "cm" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() * 100.toBigDecimal()).toString()
+                                (edFrom.text.toString().toBigDecimal() * 100.0.toBigDecimal()).toPlainString()
                             "dm" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() * 10.toBigDecimal()).toString()
+                                (edFrom.text.toString().toBigDecimal() * 10.0.toBigDecimal()).toPlainString()
                             "m" -> tvTo.text = edFrom.text
                         }
                     }

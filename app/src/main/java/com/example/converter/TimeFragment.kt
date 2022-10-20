@@ -33,22 +33,27 @@ class TimeFragment : Fragment() {
         val activity = activity
 
         dataModel.message.observe(activity as LifecycleOwner) {
-            if(binding.edFrom.text.length == 16 && binding.edFrom.text[15].equals('.')) {
-                if(binding.edFrom.length() < 17) {
-                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
-                }
-                else {
-                    Toast.makeText(activity, "You can only enter 17 characters",
-                        Toast.LENGTH_SHORT).show()
-                }
+            if(it=="") {
+                binding.edFrom.setText("")
             }
             else {
-                if(binding.edFrom.length() < 16) {
-                    binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                if(binding.edFrom.text.length == 16 && binding.edFrom.text[15].equals('.')) {
+                    if(binding.edFrom.length() < 17) {
+                        binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                    }
+                    else {
+                        Toast.makeText(activity, "You can only enter 17 characters",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
                 else {
-                    Toast.makeText(activity, "You can only enter 16 characters",
-                        Toast.LENGTH_SHORT).show()
+                    if(binding.edFrom.length() < 16) {
+                        binding.edFrom.getText()?.insert(binding.edFrom.getSelectionStart(), it)
+                    }
+                    else {
+                        Toast.makeText(activity, "You can only enter 16 characters",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -93,7 +98,15 @@ class TimeFragment : Fragment() {
 
 
         binding.copyButton.setOnClickListener {
-            dataModel.copyMessage.value = binding.edFrom.text.toString()
+            val prevText: EditText = binding.edFrom
+            val str: String = prevText.text.toString()
+            if(str.isNotEmpty()){
+                dataModel.copyMessage.value = prevText.text.toString()
+            }
+            else
+            {
+                Toast.makeText(activity,"Please Enter some text", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.pasteButton.setOnClickListener {
@@ -115,14 +128,20 @@ class TimeFragment : Fragment() {
                         Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    val fromId = fromSpin.selectedItemPosition
-                    val toId = toSpin.selectedItemPosition
-                    fromSpin.setSelection(toId)
-                    toSpin.setSelection(fromId)
+                    if(tvTo.getText().toString().toFloatOrNull() != null) {
+                        val fromId = fromSpin.selectedItemPosition
+                        val toId = toSpin.selectedItemPosition
+                        fromSpin.setSelection(toId)
+                        toSpin.setSelection(fromId)
 
-                    val buffer = edFrom.text
-                    edFrom.setText(tvTo.text)
-                    tvTo.text = buffer
+                        val buffer = edFrom.text
+                        edFrom.setText(tvTo.text)
+                        tvTo.text = buffer
+                    }
+                    else {
+                        Toast.makeText(activity, "You cannot do this because value in ConvertTo is incorrect",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -133,26 +152,71 @@ class TimeFragment : Fragment() {
                 when(fromSpin.selectedItem.toString()) {
                     "sec" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "sec" -> tvTo.text = edFrom.text
-                            "min" -> tvTo.text = convertBigDecimal(60, edFrom)
-                            "h" -> tvTo.text = convertBigDecimal(3600, edFrom)
+                            "sec" -> {
+                                tvTo.text = edFrom.text
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            "min" -> {
+                                tvTo.text = convertBigDecimal(60, edFrom)
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            "h" -> {
+                                tvTo.text = convertBigDecimal(3600, edFrom)
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         }
                     }
                     "min" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "sec" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() * 60.toBigDecimal()).toString()
-                            "min" -> tvTo.text = edFrom.text
-                            "h" -> tvTo.text = convertBigDecimal(60, edFrom)
+                            "sec" -> {
+                                tvTo.text =
+                                    (edFrom.text.toString().toBigDecimal() * 60.toBigDecimal()).toPlainString()
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            "min" -> {
+                                tvTo.text = edFrom.text
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            "h" -> {
+                                tvTo.text = convertBigDecimal(60, edFrom)
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         }
                     }
                     "h" -> {
                         when(toSpin.selectedItem.toString()) {
-                            "sec" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() * 3600.toBigDecimal()).toString()
-                            "min" -> tvTo.text =
-                                (edFrom.text.toString().toBigDecimal() * 60.toBigDecimal()).toString()
-                            "h" -> tvTo.text = edFrom.text
+                            "sec" -> {
+                                tvTo.text =
+                                    (edFrom.text.toString().toBigDecimal() * 3600.toBigDecimal()).toPlainString()
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            "min" -> {
+                                tvTo.text =
+                                    (edFrom.text.toString().toBigDecimal() * 60.toBigDecimal()).toPlainString()
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            "h" -> {
+                                tvTo.text = edFrom.text
+                                if(tvTo.text=="0.0(0)") {
+                                    Toast.makeText(activity,"You entered too small value!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         }
                     }
                 }
@@ -163,7 +227,7 @@ class TimeFragment : Fragment() {
     fun convertBigDecimal(value: Int, editT: EditText):String {
         var res = editT.text.toString().toBigDecimal()
             .divide(BigDecimal(value), 40, RoundingMode.HALF_UP)
-            .stripTrailingZeros().toString()
+            .stripTrailingZeros().toPlainString()
 
         var round_up_flag = 0
         var dot_flag = 0

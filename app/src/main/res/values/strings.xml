@@ -5,7 +5,7 @@
     <string name="time" translatable="false">Time</string>
     <string name="categories_for_comparison" translatable="false">Categories for comparison</string>
 
-    <string-array name="distances">
+    <string-array name="speed">
         <item>cm</item>
         <item>dm</item>
         <item>m</item>
